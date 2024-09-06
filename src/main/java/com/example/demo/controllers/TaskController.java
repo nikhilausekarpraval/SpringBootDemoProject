@@ -1,4 +1,5 @@
 package com.example.demo.controllers;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.CommonApiResponse;
+import com.example.demo.dto.TaskDto;
 import com.example.demo.dto.TasksResponseDto;
+import com.example.demo.entity.Employee;
 import com.example.demo.entity.Task;
+import com.example.demo.service.EmployeeService;
 import com.example.demo.service.TaskService;
 
 @RestController
@@ -28,10 +32,28 @@ public class TaskController {
 	@Autowired
 	private TaskService taskService;
 	
+	@Autowired
+	private EmployeeService employeeService;
+	
 	@PostMapping("register")
 	@ManagedOperation(description = "Api to register Task")
-	public ResponseEntity<CommonApiResponse> TaskRegister(@RequestBody Task task) {
+	public ResponseEntity<CommonApiResponse> TaskRegister(@RequestBody TaskDto taskDto) {
 
+		Task task = new Task();
+        task.setName(taskDto.getName());
+        task.setDescription(taskDto.getDescription());
+        task.setAssignedOnDt(taskDto.getAssignedOnDt());
+        task.setEndDate(taskDto.getEndDate());
+        task.setCreatedOnDt(LocalDate.now());
+        task.setCreatedBy(taskDto.getCreatedBy());
+
+        // Fetch and set the Employee if employeeId is provided
+//        Employee employee = this.employeeService.getEmployeeById(taskDto.getEmployeeId());
+//        if (employee == null) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Return 404 if employee doesn't exist
+//        }
+//        task.setEmployee(employee); // Set the managed employee entity
+        
 		CommonApiResponse response = new CommonApiResponse();
 		Task registerTask = this.taskService.addTask(task);
 		

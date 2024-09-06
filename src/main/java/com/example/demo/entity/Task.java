@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 import java.time.LocalDate;
+import com.example.demo.dto.EmployeeDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -8,7 +9,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
@@ -38,7 +38,7 @@ public class Task {
 	private String createdBy;
     
     // Foreign Key: Many tasks belong to one employee
-    @ManyToOne(fetch = FetchType.LAZY, optional = true) // Foreign key column can be null
-    @JoinColumn(name = "employee_id", referencedColumnName = "id") // This maps the foreign key column 'employee_id' to Employee's 'id'
-    private Employee employee;  // This is the foreign key relation
+//    @ManyToOne(fetch = FetchType.LAZY, optional = true) // Foreign key column can be null
+//    @JoinColumn(name = "employee_id", referencedColumnName = "id") // This maps the foreign key column 'employee_id' to Employee's 'id'
+//    private Employee employee;  // This is the foreign key relation
 }

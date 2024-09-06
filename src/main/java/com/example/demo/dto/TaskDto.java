@@ -3,11 +3,11 @@ import java.time.LocalDate;
 import lombok.Data;
 
 @Data
-public class TasksDto {
+public class TaskDto {
 	
 	private int id;
 	
-	private int employeeID;
+	private int employeeId;
 	
 	private String name;
 	

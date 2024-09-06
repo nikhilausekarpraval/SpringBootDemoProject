@@ -2,6 +2,9 @@ package com.example.demo.entity;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.demo.dto.TaskDto;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -42,7 +45,7 @@ public class Employee {
 	@Column(name = "createdBy")
 	private String createdBy;
 	
-	// Bi-directional relationship mapped by 'employee' in Task entity
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Task> tasks;  // One employee can have many tasks
+//	// Bi-directional relationship mapped by 'employee' in Task entity
+//    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<TaskDto> tasks;  // One employee can have many tasks
 }
