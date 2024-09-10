@@ -1,9 +1,9 @@
 package com.example.demo.entity;
 import java.time.LocalDate;
 import com.example.demo.dto.EmployeeDto;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -37,8 +37,7 @@ public class Task {
     @Column(name="createdBy")
 	private String createdBy;
     
-    // Foreign Key: Many tasks belong to one employee
-//    @ManyToOne(fetch = FetchType.LAZY, optional = true) // Foreign key column can be null
-//    @JoinColumn(name = "employee_id", referencedColumnName = "id") // This maps the foreign key column 'employee_id' to Employee's 'id'
-//    private Employee employee;  // This is the foreign key relation
+    @ManyToOne
+    @JoinColumn(name = "employee_id") // This will create the foreign key column in the Task table
+    private Employee employee;
 }

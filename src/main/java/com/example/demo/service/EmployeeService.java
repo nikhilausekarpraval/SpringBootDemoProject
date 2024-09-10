@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.Mappers.EmployeeMapper;
 import com.example.demo.dao.EmployeeDao;
 import com.example.demo.dto.EmployeeDto;
 import com.example.demo.entity.Employee;
@@ -16,12 +17,18 @@ public class EmployeeService {
 	@Autowired
 	private EmployeeDao employeeDao;
 	
-	public Employee addEmployee(Employee Employee) {
-		return employeeDao.save(Employee);
+	@Autowired
+	private  EmployeeMapper employeeMapper;
+	
+	public Employee addEmployee(EmployeeDto employeeDto) {
+		
+		Employee employee = employeeMapper.employeeDtoToEmployee(employeeDto);
+		return employeeDao.save(employee);
 	}
 	
-	public Employee updateEmployee(Employee Employee) {
-		return employeeDao.save(Employee);
+	public Employee updateEmployee(EmployeeDto employeeDto) {
+		Employee employee = employeeMapper.employeeDtoToEmployee(employeeDto);
+		return employeeDao.save(employee);
 	}
 	
 	public List<Employee> getAllEmployees() {
@@ -34,15 +41,15 @@ public class EmployeeService {
 	
 	public Employee getEmployeeById(int EmployeeId) {
 		
-		Employee p = null;
+		Employee empDto = null;
 		
-		Optional<Employee> oP = employeeDao.findById(EmployeeId);
+		Optional<Employee> emp = employeeDao.findById(EmployeeId);
 		
-		if(oP.isPresent()) {
-			p = oP.get();
+		if(emp.isPresent()) {
+			empDto = emp.get();
 		}
 		
-		return p;
+		return empDto; 
 	}
 	
 	public List<Employee> getAllEmployeesByEmployeeName(String EmployeeName) {

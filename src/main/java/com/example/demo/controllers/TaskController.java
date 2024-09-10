@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.CommonApiResponse;
+import com.example.demo.dto.EmployeeDto;
 import com.example.demo.dto.TaskDto;
 import com.example.demo.dto.TasksResponseDto;
 import com.example.demo.entity.Employee;
@@ -46,14 +47,12 @@ public class TaskController {
         task.setEndDate(taskDto.getEndDate());
         task.setCreatedOnDt(LocalDate.now());
         task.setCreatedBy(taskDto.getCreatedBy());
-
-        // Fetch and set the Employee if employeeId is provided
-//        Employee employee = this.employeeService.getEmployeeById(taskDto.getEmployeeId());
-//        if (employee == null) {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Return 404 if employee doesn't exist
-//        }
-//        task.setEmployee(employee); // Set the managed employee entity
         
+//		EmployeeDto employeeDto = this.employeeService.getEmployeeById(taskDto.getEmployeeId());
+//	      if (employeeDto != null) {
+//	    	  task.setEmployeeDto(employeeDto);
+//	      }
+	      
 		CommonApiResponse response = new CommonApiResponse();
 		Task registerTask = this.taskService.addTask(task);
 		
@@ -97,19 +96,34 @@ public class TaskController {
 	
 	@PutMapping("update")
 	@ManagedOperation(description = "Api to update Task")
-	public ResponseEntity<CommonApiResponse> updateTask(@RequestBody Task task) {
+	public ResponseEntity<CommonApiResponse> updateTask(@RequestBody TaskDto taskDto) {
 
 		CommonApiResponse response = new CommonApiResponse();
+		Task task = new Task();
+        task.setName(taskDto.getName());
+        task.setDescription(taskDto.getDescription());
+        task.setAssignedOnDt(taskDto.getAssignedOnDt());
+        task.setEndDate(taskDto.getEndDate());
+        task.setCreatedOnDt(LocalDate.now());
+        task.setCreatedBy(taskDto.getCreatedBy());
+        
+		Employee employee = this.employeeService.getEmployeeById(taskDto.getEmployeeId());
+
+	      if (employee == null ) {
+	          return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
+	      }
+	      task.setEmployee(employee);
+	      
 		Task updateTask = this.taskService.updateTask(task);
 		
 		if (updateTask != null) {
 			response.setSuccess(true);
-			response.setResponseMessage(task.getName() + " Updated Successfully");
+			response.setResponseMessage(taskDto.getName() + " Updated Successfully");
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.OK);
 		}
 
 		response.setSuccess(true);
-		response.setResponseMessage("Failed to Update " + task.getName() + " Task");
+		response.setResponseMessage("Failed to Update " + taskDto.getName() + " Task");
 		return new ResponseEntity<CommonApiResponse>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 
 	}

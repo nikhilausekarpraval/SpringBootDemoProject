@@ -1,6 +1,5 @@
 package com.example.demo.controllers;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.example.demo.dto.CommonApiResponse;
+import com.example.demo.dto.EmployeeDto;
 import com.example.demo.dto.EmployeesResponseDto;
 import com.example.demo.entity.Employee;
 import com.example.demo.service.EmployeeService;
@@ -30,19 +29,19 @@ public class EmployeeController {
 	
 	@PostMapping("register")
 	@ManagedOperation(description = "Api to register Employee")
-	public ResponseEntity<CommonApiResponse> employeeRegister(@RequestBody Employee employee) {
+	public ResponseEntity<CommonApiResponse> employeeRegister(@RequestBody EmployeeDto employeeDto) {
 
 		CommonApiResponse response = new CommonApiResponse();
-		Employee registerEmployee = this.employeeService.addEmployee(employee);
+		Employee registerEmployee = this.employeeService.addEmployee(employeeDto);
 		
 		if (registerEmployee != null) {
 			response.setSuccess(true);
-			response.setResponseMessage(employee.getName() + " Registered Successfully");
+			response.setResponseMessage(employeeDto.getName() + " Registered Successfully");
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.OK);
 		}
 
 		response.setSuccess(true);
-		response.setResponseMessage("Failed to Register " + employee.getName() + " Employee");
+		response.setResponseMessage("Failed to Register " + employeeDto.getName() + " Employee");
 		return new ResponseEntity<CommonApiResponse>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 
 	}
@@ -76,19 +75,19 @@ public class EmployeeController {
 	
 	@PutMapping("update")
 	@ManagedOperation(description = "Api to update Employee")
-	public ResponseEntity<CommonApiResponse> updateEmployee(@RequestBody Employee employee) {
+	public ResponseEntity<CommonApiResponse> updateEmployee(@RequestBody EmployeeDto employeeDto) {
 
 		CommonApiResponse response = new CommonApiResponse();
-		Employee registerEmployee = this.employeeService.updateEmployee(employee);
+		Employee registerEmployee = this.employeeService.updateEmployee(employeeDto);
 		
 		if (registerEmployee != null) {
 			response.setSuccess(true);
-			response.setResponseMessage(employee.getName() + " Updated Successfully");
+			response.setResponseMessage(employeeDto.getName() + " Updated Successfully");
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.OK);
 		}
 
 		response.setSuccess(true);
-		response.setResponseMessage("Failed to Update " + employee.getName() + " Employee");
+		response.setResponseMessage("Failed to Update " + employeeDto.getName() + " Employee");
 		return new ResponseEntity<CommonApiResponse>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 
 	}

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.demo.dto.TaskDto;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -45,7 +47,4 @@ public class Employee {
 	@Column(name = "createdBy")
 	private String createdBy;
 	
-//	// Bi-directional relationship mapped by 'employee' in Task entity
-//    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private List<TaskDto> tasks;  // One employee can have many tasks
 }
