@@ -33,7 +33,7 @@ public class EmployeeService {
 	
 	public List<Employee> getAllEmployees() {
 		
-	    List<Employee> employee =  employeeDao.findAll();
+	    List<Employee> employee =  employeeDao.findEmployeesWithTasksHavingEmployeeId();
 		return employee;
 	}
 	
