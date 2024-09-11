@@ -1,5 +1,7 @@
 package com.example.demo.controllers;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,9 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.Mappers.EmployeeMapper;
 import com.example.demo.dto.CommonApiResponse;
 import com.example.demo.dto.EmployeeDto;
-import com.example.demo.dto.EmployeesResponseDto;
+import com.example.demo.dto.EmployeeResponseDto;
+import com.example.demo.dto.EmployeeTaskDto;
 import com.example.demo.entity.Employee;
 import com.example.demo.service.EmployeeService;
 
@@ -26,6 +31,9 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeService employeeService;
+	
+	@Autowired
+	private  EmployeeMapper employeeMapper;
 	
 	@PostMapping("register")
 	@ManagedOperation(description = "Api to register Employee")
@@ -62,15 +70,15 @@ public class EmployeeController {
 	}
 	
 	@GetMapping("get")
-	public ResponseEntity<EmployeesResponseDto> getAllEmployee() {
+	public ResponseEntity<EmployeeResponseDto> getAllEmployee() {
 		
-		EmployeesResponseDto response = new EmployeesResponseDto();
+		EmployeeResponseDto response = new EmployeeResponseDto();
 		List<Employee> employees = this.employeeService.getAllEmployees();
-		
-		response.setEmployees(employees);
+		List<EmployeeTaskDto> employeeTaskDtos = employees.stream().map(employeeMapper::employeeToEmployeeTaskDto).collect(Collectors.toList());
+		response.setEmployees(employeeTaskDtos);
 		response.setSuccess(true);
 		response.setResponseMessage("employees fetched successfully");
-		return new ResponseEntity<EmployeesResponseDto>(response, HttpStatus.OK);
+		return new ResponseEntity<EmployeeResponseDto>(response, HttpStatus.OK);
 	}
 	
 	@PutMapping("update")

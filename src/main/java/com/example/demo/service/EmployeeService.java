@@ -32,7 +32,9 @@ public class EmployeeService {
 	}
 	
 	public List<Employee> getAllEmployees() {
-		return employeeDao.findAll();
+		
+	    List<Employee> employee =  employeeDao.findAll();
+		return employee;
 	}
 	
 	public void deleteEmployee(int employeeId) {

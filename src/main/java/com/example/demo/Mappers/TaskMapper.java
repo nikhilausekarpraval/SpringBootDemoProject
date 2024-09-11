@@ -7,7 +7,7 @@ import com.example.demo.entity.Task;
 @Mapper(componentModel = "spring")
 public abstract class TaskMapper {
 
-   public abstract Task employeeDtoToEmployee(TaskDto employeeDto);
+   public abstract Task taskDtoToTask(TaskDto employeeDto);
 
-   public abstract TaskDto employeeToEmployeeDto(Task employee);
+   public abstract TaskDto taskToTaskDto(Task employee);
 }

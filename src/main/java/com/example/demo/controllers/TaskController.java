@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.Mappers.TaskMapper;
 import com.example.demo.dto.CommonApiResponse;
 import com.example.demo.dto.EmployeeDto;
 import com.example.demo.dto.TaskDto;
@@ -36,22 +37,14 @@ public class TaskController {
 	@Autowired
 	private EmployeeService employeeService;
 	
+	@Autowired
+	private TaskMapper taskMapper;
+	
 	@PostMapping("register")
 	@ManagedOperation(description = "Api to register Task")
 	public ResponseEntity<CommonApiResponse> TaskRegister(@RequestBody TaskDto taskDto) {
 
-		Task task = new Task();
-        task.setName(taskDto.getName());
-        task.setDescription(taskDto.getDescription());
-        task.setAssignedOnDt(taskDto.getAssignedOnDt());
-        task.setEndDate(taskDto.getEndDate());
-        task.setCreatedOnDt(LocalDate.now());
-        task.setCreatedBy(taskDto.getCreatedBy());
-        
-//		EmployeeDto employeeDto = this.employeeService.getEmployeeById(taskDto.getEmployeeId());
-//	      if (employeeDto != null) {
-//	    	  task.setEmployeeDto(employeeDto);
-//	      }
+		Task task = taskMapper.taskDtoToTask(taskDto);
 	      
 		CommonApiResponse response = new CommonApiResponse();
 		Task registerTask = this.taskService.addTask(task);
@@ -99,13 +92,7 @@ public class TaskController {
 	public ResponseEntity<CommonApiResponse> updateTask(@RequestBody TaskDto taskDto) {
 
 		CommonApiResponse response = new CommonApiResponse();
-		Task task = new Task();
-        task.setName(taskDto.getName());
-        task.setDescription(taskDto.getDescription());
-        task.setAssignedOnDt(taskDto.getAssignedOnDt());
-        task.setEndDate(taskDto.getEndDate());
-        task.setCreatedOnDt(LocalDate.now());
-        task.setCreatedBy(taskDto.getCreatedBy());
+		Task task = taskMapper.taskDtoToTask(taskDto);
         
 		Employee employee = this.employeeService.getEmployeeById(taskDto.getEmployeeId());
 

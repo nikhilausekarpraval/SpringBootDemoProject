@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.example.demo.dto.TaskDto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -47,4 +48,7 @@ public class Employee {
 	@Column(name = "createdBy")
 	private String createdBy;
 	
+	@JsonIgnore
+    @OneToMany(mappedBy = "employee",fetch = FetchType.LAZY) 
+    private List<Task> tasks;
 }

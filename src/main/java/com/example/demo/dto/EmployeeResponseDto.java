@@ -1,11 +1,12 @@
 package com.example.demo.dto;
+
 import java.util.List;
 import com.example.demo.entity.Employee;
 import lombok.Data;
 
 @Data
-public class EmployeesResponseDto extends CommonApiResponse {
+public class EmployeeResponseDto extends CommonApiResponse {
 	
-	private List<Employee> employees;
+	private List<EmployeeTaskDto> employees;
 
 }
