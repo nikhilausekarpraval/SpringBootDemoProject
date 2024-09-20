@@ -1,9 +1,6 @@
 package com.example.demo.Mappers;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-
-import com.example.demo.dto.EmployeeTaskDto;
 import com.example.demo.dto.TaskDto;
 import com.example.demo.entity.Task;
 

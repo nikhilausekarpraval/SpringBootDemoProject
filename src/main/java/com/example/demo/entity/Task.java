@@ -29,6 +29,9 @@ public class Task {
 	
     @Column(name = "assignedOnDt")
 	private LocalDate assignedOnDt;
+    
+    @Column(name="status")
+    private String status;
 	
     @Column(name = "endDate")
 	private LocalDate endDate;

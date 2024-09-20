@@ -24,4 +24,5 @@ public abstract class EmployeeMapper {
    
    @Mapping(target = "tasks", source = "tasks")
    public abstract EmployeeTaskDto employeeToEmployeeTaskDto(Employee employee);
+   
 }

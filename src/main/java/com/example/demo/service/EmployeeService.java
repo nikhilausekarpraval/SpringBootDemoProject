@@ -16,7 +16,7 @@ public class EmployeeService {
 
 	@Autowired
 	private EmployeeDao employeeDao;
-	
+		
 	@Autowired
 	private  EmployeeMapper employeeMapper;
 	
@@ -36,6 +36,11 @@ public class EmployeeService {
 	    List<Employee> employee =  employeeDao.findEmployeesWithTasksHavingEmployeeId();
 		return employee;
 	}
+	
+//	public List<Employee> getOnlyEmployees(){
+//		List<Employee> employee =  employeeDao.findAll();
+//		return employee;
+//	}
 	
 	public void deleteEmployee(int employeeId) {
 		 employeeDao.deleteById(employeeId);

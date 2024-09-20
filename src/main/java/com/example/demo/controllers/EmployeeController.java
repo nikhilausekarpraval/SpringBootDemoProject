@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.Mappers.EmployeeMapper;
 import com.example.demo.dto.CommonApiResponse;
 import com.example.demo.dto.EmployeeDto;
+import com.example.demo.dto.EmployeeResponse;
 import com.example.demo.dto.EmployeeResponseDto;
 import com.example.demo.dto.EmployeeTaskDto;
 import com.example.demo.entity.Employee;
@@ -80,6 +81,17 @@ public class EmployeeController {
 		response.setResponseMessage("employees fetched successfully");
 		return new ResponseEntity<EmployeeResponseDto>(response, HttpStatus.OK);
 	}
+	
+//	@GetMapping("getAll")
+//	public ResponseEntity<EmployeeResponse> getOnlyEmployee() {
+//		
+//		EmployeeResponse response = new EmployeeResponse();
+//		List<EmployeeDto> employees = this.employeeService.getOnlyEmployees();
+//		response.setEmployees(employees);
+//		response.setSuccess(true);
+//		response.setResponseMessage("employees fetched successfully");
+//		return new ResponseEntity<EmployeeResponse>(response, HttpStatus.OK);
+//	}
 	
 	@PutMapping("update")
 	@ManagedOperation(description = "Api to update Employee")

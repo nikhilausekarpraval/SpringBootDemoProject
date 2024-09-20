@@ -13,6 +13,8 @@ public class TaskDto {
 	
 	private String description;
 	
+	private String status;
+	
 	private LocalDate assignedOnDt;
 	
 	private LocalDate endDate;
