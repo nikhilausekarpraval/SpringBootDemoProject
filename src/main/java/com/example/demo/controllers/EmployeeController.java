@@ -27,7 +27,7 @@ import com.example.demo.service.EmployeeService;
 
 @RestController
 @CrossOrigin
-@RequestMapping("api/employee/")
+@RequestMapping("employee/")
 public class EmployeeController {
 
 	@Autowired
