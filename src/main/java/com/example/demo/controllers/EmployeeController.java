@@ -1,4 +1,5 @@
 package com.example.demo.controllers;
+import java.beans.JavaBean;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,13 +29,13 @@ import com.example.demo.service.EmployeeService;
 @RestController
 @CrossOrigin
 @RequestMapping("employee/")
+
 public class EmployeeController {
 	
 	private EmployeeService employeeService;
 	private EmployeeMapper employeeMapper;
 	
-	@Autowired
-	public void constructor(EmployeeService employeeService,EmployeeMapper employeeMapper){
+	public EmployeeController(EmployeeService employeeService,EmployeeMapper employeeMapper){
 		 this.employeeService = employeeService;
 		 this.employeeMapper = employeeMapper;
 	}
