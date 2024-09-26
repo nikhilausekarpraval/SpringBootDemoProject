@@ -1,6 +1,7 @@
 package com.example.demo.dto;
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 import lombok.Data;
@@ -22,6 +23,8 @@ public class EmployeeTaskDto {
 	private String mobileNo;
 	
 	private String createdBy ;
+	
+	private LocalDate createdOnDt;
 	
 	private List<TaskDto> tasks;
 	
