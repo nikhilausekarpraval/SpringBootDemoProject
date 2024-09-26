@@ -29,12 +29,16 @@ import com.example.demo.service.EmployeeService;
 @CrossOrigin
 @RequestMapping("employee/")
 public class EmployeeController {
-
-	@Autowired
+	
 	private EmployeeService employeeService;
+	private EmployeeMapper employeeMapper;
 	
 	@Autowired
-	private  EmployeeMapper employeeMapper;
+	public void constructor(EmployeeService employeeService,EmployeeMapper employeeMapper){
+		 this.employeeService = employeeService;
+		 this.employeeMapper = employeeMapper;
+	}
+	
 	
 	@PostMapping("register")
 	@ManagedOperation(description = "Api to register Employee")
