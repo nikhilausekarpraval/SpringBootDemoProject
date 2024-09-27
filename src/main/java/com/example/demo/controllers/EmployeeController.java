@@ -1,4 +1,5 @@
 package com.example.demo.controllers;
+import java.beans.JavaBean;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,13 +29,17 @@ import com.example.demo.service.EmployeeService;
 @RestController
 @CrossOrigin
 @RequestMapping("employee/")
-public class EmployeeController {
 
-	@Autowired
-	private EmployeeService employeeService;
+public class EmployeeController {
 	
-	@Autowired
-	private  EmployeeMapper employeeMapper;
+	private EmployeeService employeeService;
+	private EmployeeMapper employeeMapper;
+	
+	public EmployeeController(EmployeeService employeeService,EmployeeMapper employeeMapper){
+		 this.employeeService = employeeService;
+		 this.employeeMapper = employeeMapper;
+	}
+	
 	
 	@PostMapping("register")
 	@ManagedOperation(description = "Api to register Employee")

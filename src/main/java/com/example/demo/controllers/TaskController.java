@@ -45,6 +45,13 @@ public class TaskController {
 	public ResponseEntity<CommonApiResponse> TaskRegister(@RequestBody TaskDto taskDto) {
 
 		Task task = taskMapper.taskDtoToTask(taskDto);
+		
+		Employee employee = this.employeeService.getEmployeeById(taskDto.getEmployeeId());
+
+	      if (employee == null ) {
+	          return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
+	      }
+	      task.setEmployee(employee);
 	      
 		CommonApiResponse response = new CommonApiResponse();
 		Task registerTask = this.taskService.addTask(task);
