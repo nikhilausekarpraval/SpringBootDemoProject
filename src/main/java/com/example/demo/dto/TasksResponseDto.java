@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 public class TasksResponseDto extends CommonApiResponse {
 	
-	private List<Task> tasks;
+	private List<TaskDto> tasks;
 
 }

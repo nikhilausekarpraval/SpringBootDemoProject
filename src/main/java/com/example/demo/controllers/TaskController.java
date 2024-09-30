@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.Mappers.TaskMapper;
 import com.example.demo.dto.CommonApiResponse;
 import com.example.demo.dto.EmployeeDto;
+import com.example.demo.dto.EmployeeTaskDto;
 import com.example.demo.dto.TaskDto;
 import com.example.demo.dto.TasksResponseDto;
 import com.example.demo.entity.Employee;
@@ -89,8 +91,8 @@ public class TaskController {
 		
 		TasksResponseDto response = new TasksResponseDto();
 		List<Task> tasks = this.taskService.getAllTasks();
-		
-		response.setTasks(tasks);
+		List<TaskDto> taskDtos = tasks.stream().map(taskMapper::taskToTaskDto).collect(Collectors.toList());
+		response.setTasks(taskDtos);
 		response.setSuccess(true);
 		response.setResponseMessage("Tasks fetched successfully");
 		return new ResponseEntity<TasksResponseDto>(response, HttpStatus.OK);
