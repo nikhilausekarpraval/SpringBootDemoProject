@@ -42,7 +42,7 @@ public class Task {
     @Column(name="createdBy")
 	private String createdBy;
     
-    
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "employeeId") // This will create the foreign key column in the Task table
     private Employee employee;

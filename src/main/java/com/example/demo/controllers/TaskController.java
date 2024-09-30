@@ -46,14 +46,16 @@ public class TaskController {
 
 		Task task = taskMapper.taskDtoToTask(taskDto);
 		
-		Employee employee = this.employeeService.getEmployeeById(taskDto.getEmployeeId());
-
-	      if (employee == null ) {
-	          return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
-	      }
-	      task.setEmployee(employee);
+//		Employee employee = this.employeeService.getEmployeeById(taskDto.getEmployeeId());
+//
+//	      if (employee == null ) {
+//	          return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
+//	      }
+//	      
+//	      task.setEmployee(employee);
 	      
 		CommonApiResponse response = new CommonApiResponse();
+		
 		Task registerTask = this.taskService.addTask(task);
 		
 		if (registerTask != null) {

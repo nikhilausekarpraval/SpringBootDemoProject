@@ -36,7 +36,7 @@ public class Employee {
 	@Column(name = "email")
 	private String email;
 	
-	@Column(name = "MmobileNo")
+	@Column(name = "mobileNo")
 	private String mobileNo;
 	
 	@Column(name = "createdOnDt")
@@ -45,7 +45,6 @@ public class Employee {
 	@Column(name = "createdBy")
 	private String createdBy;
 	
-	@JsonIgnore
     @OneToMany(mappedBy = "employee",fetch = FetchType.LAZY) 
     private List<Task> tasks;
 }
