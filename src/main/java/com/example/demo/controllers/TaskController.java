@@ -45,18 +45,16 @@ public class TaskController {
 	@PostMapping("register")
 	@ManagedOperation(description = "Api to register Task")
 	public ResponseEntity<CommonApiResponse> TaskRegister(@RequestBody TaskDto taskDto) {
+		
+		CommonApiResponse response = new CommonApiResponse();
 
 		Task task = taskMapper.taskDtoToTask(taskDto);
 		
-//		Employee employee = this.employeeService.getEmployeeById(taskDto.getEmployeeId());
-//
-//	      if (employee == null ) {
-//	          return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
-//	      }
-//	      
-//	      task.setEmployee(employee);
-	      
-		CommonApiResponse response = new CommonApiResponse();
+		Employee employee = this.employeeService.getEmployeeById(taskDto.getEmployeeId());
+
+	      if (employee != null ) {
+	    	  task.setEmployee(employee);
+	      }
 		
 		Task registerTask = this.taskService.addTask(task);
 		
